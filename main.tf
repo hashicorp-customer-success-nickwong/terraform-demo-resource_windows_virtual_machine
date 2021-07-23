@@ -7,7 +7,7 @@ resource "azurerm_public_ip" "demo" {
 }
 
 resource "azurerm_network_interface" "demo" {
-  name                = "${name_prefix}nic"
+  name                = "${var.name_prefix}nic"
   count               = var.machine_count
   location            = var.location
   resource_group_name = var.resource_group_name
