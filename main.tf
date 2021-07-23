@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "demo" {
-  name                = "${var.name_prefix}public-ip"
+  name                = "${var.name}-public-ip"
   count               = var.machine_count
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -7,8 +7,7 @@ resource "azurerm_public_ip" "demo" {
 }
 
 resource "azurerm_network_interface" "demo" {
-  name                = "${var.name_prefix}nic"
-  count               = var.machine_count
+  name                = "${var.name}-nic"
   location            = var.location
   resource_group_name = var.resource_group_name
 
@@ -17,12 +16,12 @@ resource "azurerm_network_interface" "demo" {
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
     primary                       = true
-    public_ip_address_id          = azurerm_public_ip.demo[count.index].id
+    public_ip_address_id          = azurerm_public_ip.demo.id
   }
 }
 
 resource "azurerm_windows_virtual_machine" "demo" {
-  name                = "${var.name_prefix}${count.index}"
+  name                = var.name
   count               = var.machine_count
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -30,7 +29,7 @@ resource "azurerm_windows_virtual_machine" "demo" {
   admin_username      = var.admin_username
   admin_password      = var.admin_password
   network_interface_ids = [
-    azurerm_network_interface.demo[count.index].id,
+    azurerm_network_interface.demo.id,
   ]
 
   os_disk {

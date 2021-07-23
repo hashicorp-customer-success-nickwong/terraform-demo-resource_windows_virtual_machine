@@ -1,11 +1,5 @@
-variable "machine_count" {
-    type = number
-    default = 1
-}
-
-variable "name_prefix" {
+variable "name" {
   type = string
-  default = "vm-"
 }
 
 variable "resource_group_name" {
