@@ -3,6 +3,7 @@ resource "azurerm_public_ip" "demo" {
   resource_group_name = var.resource_group_name
   location            = var.location
   allocation_method   = "Static"
+  tags = var.tags
 }
 
 resource "azurerm_network_interface" "demo" {
@@ -17,6 +18,8 @@ resource "azurerm_network_interface" "demo" {
     primary                       = true
     public_ip_address_id          = azurerm_public_ip.demo.id
   }
+
+  tags = var.tags
 }
 
 resource "azurerm_windows_virtual_machine" "demo" {
@@ -41,4 +44,6 @@ resource "azurerm_windows_virtual_machine" "demo" {
     sku       = var.source_image_sku
     version   = var.source_image_version
   }
+
+  tags = var.tags
 }
