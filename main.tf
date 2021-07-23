@@ -1,6 +1,5 @@
 resource "azurerm_public_ip" "demo" {
   name                = "${var.name}-public-ip"
-  count               = var.machine_count
   resource_group_name = var.resource_group_name
   location            = var.location
   allocation_method   = "Static"
@@ -22,7 +21,6 @@ resource "azurerm_network_interface" "demo" {
 
 resource "azurerm_windows_virtual_machine" "demo" {
   name                = var.name
-  count               = var.machine_count
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = var.size
