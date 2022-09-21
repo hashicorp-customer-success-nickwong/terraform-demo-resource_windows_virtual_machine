@@ -1,1 +1,1 @@
-# terraform-jaredholgate-resource_windows_virtual_machine 
+# terraform-demo-resource_windows_virtual_machine 
